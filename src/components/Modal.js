@@ -112,6 +112,7 @@ export default {
     methodsData(data) {
       this.$emit("methods-data", data);
     },
+    // 新增資料
     async newData() {
       this.loadingModal = true;
       await createProduct(this.productModel).then(res => {
@@ -122,6 +123,7 @@ export default {
           this.loadingModal = false;
         });
     },
+    // 修改資料
     async updateData() {
       this.loadingModal = true;
       await editProduct(this.productModel.id, { ...this.productModel }).then(() => {
@@ -132,6 +134,7 @@ export default {
           this.loadingModal = false;
         });
     },
+    // 呼叫 新增 or 修改 方法
     modelMethodHandler(data) {
       const modelMethods = {
         new: this.newData,
@@ -139,12 +142,13 @@ export default {
       };
       modelMethods[this.modelState](data);
     },
-    async uploadPic() {
+    // 上傳資料
+     uploadPic() {
       this.loadingModal = true;
       const uploadedFile = this.$refs.file.files[0];
       const formData = new FormData();
       formData.append("file", uploadedFile);
-      await getPic(formData).then(res => {
+       getPic(formData).then(res => {
         this.$emit("upload-pic", res.data.path);
         this.loadingModal = false;
       }).catch(() => {
