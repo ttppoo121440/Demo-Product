@@ -19,8 +19,7 @@ new Vue({
           document.cookie = `token=${token};expires=${new Date(
             expired * 1000
           )};`;
-          console.log(res);
-          window.location = "Product.html";
+          window.location = "./pages/Product.html";
         }).catch(error => {
           console.log(error);
         });

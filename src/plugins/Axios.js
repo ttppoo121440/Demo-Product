@@ -76,8 +76,6 @@ function axiosMethod(method, url, data = {}) {
   });
 }
 
-
-
 export function post(url, data = {}) {
   return new Promise(resolve => {
     resolve(axiosMethod("post", url, data));

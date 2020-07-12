@@ -13,6 +13,9 @@ export const Login = data => post("api/auth/login", data);
 export const getProduct = data =>
   get(`api/${uuid}/admin/ec/products`, { ...data });
 
+  export const getSingleProduct = id =>
+  get(`api/${uuid}/admin/ec/product/${id}`);
+
 export const createProduct = data =>
   post(`api/${uuid}/admin/ec/product`, { ...data });
 

@@ -115,7 +115,6 @@ export default {
     async newData() {
       this.loadingModal = true;
       await createProduct(this.productModel).then(res => {
-          console.log(res);
           $("#dialog").modal("hide");
           this.loadingModal = false;
           this.$emit('update-data')

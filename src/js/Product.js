@@ -4,7 +4,7 @@ import Modal from "../components/Modal";
 import tableView from "../components/tableView";
 import DeleteModal from "../components/DeleteModal";
 import Navigation from "../components/Navigation";
-import { getProduct } from "../utils/api";
+import { getProduct,getSingleProduct } from "../utils/api";
 
 new Vue({
   el: "#app",
@@ -39,7 +39,6 @@ new Vue({
     },
     modelState: null,
     loading: false,
-    pagination: [],
     currentPage: 1,
     pageSize: 10
   },
@@ -74,8 +73,7 @@ new Vue({
     changeNav(page) {
       this.current = page;
     },
-    openModal(data) {
-      $("#dialog").modal("show");
+     openModal(data) {
       this.modelState = data.type;
       this.openDataHandler(data);
     },
@@ -85,16 +83,29 @@ new Vue({
           options: {meal: null}
           }
         );
-      } else {
-        this.productModel = Object.assign({}, data.item);
+        $("#dialog").modal("show");
+      } else if(data.type === "edit"){
+        this.getSingleProduct(data)
+        
+      } else{
+        this.productModel = Object.assign({},data.item)
+        $("#dialog").modal("show");
       }
+    },
+    getSingleProduct(data){
+      this.loading = true
+      getSingleProduct(data.item.id).then(res=>{
+        this.productModel = res.data
+        this.loading = false
+        $("#dialog").modal("show");
+      }).catch(() => {
+        this.loading = false;
+      });
     },
     getProducts() {
       this.loading = true;
       getProduct().then(res => {
-          console.log(res);
           this.products = res.data;
-          this.pagination = res.meta.pagination;
           this.loading = false;
         }).catch(() => {
           this.loading = false;

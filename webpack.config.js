@@ -7,7 +7,7 @@ module.exports = {
     Product:'./js/Product.js'
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname,'dist'),
     filename: './js/[name].js',
   },
   devServer:{

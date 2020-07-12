@@ -52,7 +52,6 @@ export default {
     async deleteProduct() {
       this.loadingModal = true;
       await destroyProduct(this.productModel.id).then(res => {
-          console.log(res);
           $("#dialog").modal("hide");
           this.loadingModal = false;
           this.$emit("update-data");
